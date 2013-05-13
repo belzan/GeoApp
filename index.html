@@ -20,11 +20,12 @@
 
     function onBodyLoad() { 
         document.addEventListener("deviceready", onDeviceReady, false);
-    }
+      }
 
     function onDeviceReady() { 
         $("#submit").on("click",function(){
             Nick = $("#naam").val();
+           $(".wrappert").hide(100);
             watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
         })
         
@@ -61,12 +62,14 @@
   <body onload="onBodyLoad()">
     <p id="geolocation">Finding geolocation...</p>
     <p id="Teller">0</p>
+    <div class="wrappert">
     Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
+    </div>
 
     <br>
     <br>
 
-    <iframe id="myiframe" width="200" height="100"></iframe>
+    <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe>
 
    
 
