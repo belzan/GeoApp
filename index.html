@@ -42,7 +42,10 @@
                             'Speed: '              + position.coords.speed  + '<br />' +
                             'Timestamp: '          + position.timestamp  + '<br />';
        Count = 0;
-       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire=1");
+       $("#Vuur").css("display","block");
+
+       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
+       Fire = 0;
     }
 
     function onError(error) {
@@ -54,7 +57,12 @@
         var element2 = document.getElementById('Teller');
         element2.innerHTML = Count;       
     }
-       
+
+
+    $("#Vuur").click(function(){
+        Fire = 1;
+        $(this).css("display","none");
+    })  
 
     </script>
 
@@ -68,6 +76,7 @@
 
     <br>
     <br>
+    <input id="Vuur" type="submit" value="VUUR!" style="display:none"></input> 
 
     <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe>
 
