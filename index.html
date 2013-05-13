@@ -15,13 +15,19 @@
     var Count = 0;
     var blaat = setInterval("TelDieShit()",1000);
     var watchID = null;
+    var Fire = 0;
+    var Nick = "";
 
     function onBodyLoad() { 
         document.addEventListener("deviceready", onDeviceReady, false);
     }
 
-    function onDeviceReady() {              
-        watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
+    function onDeviceReady() { 
+        $("#submit").on("click",function(){
+            Nick = $("#naam").val();
+            watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
+        })
+        
     }
 
     function onSuccess(position) {
@@ -35,7 +41,7 @@
                             'Speed: '              + position.coords.speed  + '<br />' +
                             'Timestamp: '          + position.timestamp  + '<br />';
        Count = 0;
-       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick=winter&fire=1");
+       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire=1");
     }
 
     function onError(error) {
@@ -55,9 +61,15 @@
   <body onload="onBodyLoad()">
     <p id="geolocation">Finding geolocation...</p>
     <p id="Teller">0</p>
-    <iframe id="myiframe" width="200" height="100" src="http://www.duwel.net/location.php"></iframe>
+    Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
+
+    <br>
+    <br>
+
+    <iframe id="myiframe" width="200" height="100"></iframe>
 
    
 
   </body>
 </html>
+
