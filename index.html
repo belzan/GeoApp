@@ -1,8 +1,63 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Een Titel</title>
-</head>
-<body>
-Je Moeder en je Vader
-</body>
+  <head>
+    <title>Device Properties Example</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> 
+
+    <script type="text/javascript" src="phonegap.js"></script>
+
+    <script type="text/javascript">        
+    
+
+
+
+    var Count = 0;
+    var blaat = setInterval("TelDieShit()",1000);
+    var watchID = null;
+
+    function onBodyLoad() { 
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    function onDeviceReady() {              
+        watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
+    }
+
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '           + position.coords.latitude + '<br />' +
+                            'Longitude: '          + position.coords.longitude + '<br />' +
+                            'Altitude: '           + position.coords.altitude   + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy   + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy+ '<br />' +
+                            'Heading: '            + position.coords.heading + '<br />' +
+                            'Speed: '              + position.coords.speed  + '<br />' +
+                            'Timestamp: '          + position.timestamp  + '<br />';
+       Count = 0;
+       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick=winter&fire=1");
+    }
+
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');        
+    }
+
+    function TelDieShit(){
+        Count++;
+        var element2 = document.getElementById('Teller');
+        element2.innerHTML = Count;       
+    }
+       
+
+    </script>
+
+  </head>
+  <body onload="onBodyLoad()">
+    <p id="geolocation">Finding geolocation...</p>
+    <p id="Teller">0</p>
+    <iframe id="myiframe" width="200" height="100" src="http://www.duwel.net/location.php"></iframe>
+
+   
+
+  </body>
 </html>
