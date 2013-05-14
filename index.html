@@ -24,7 +24,7 @@
 
     function onDeviceReady() { 
         $("#submit").on("click",function(){
-            Nick = $("#naam").val();
+            Nick = $("#naam").val();			
            $(".wrappert").hide(100);
             watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
         })
@@ -57,7 +57,7 @@
     }
 
 
-    $("#Vuur").click(function(){
+    $("#Vuur").on("click", function(){
         Fire = 1;
         $(this).attr("disabled","disabled");
         
