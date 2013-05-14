@@ -41,10 +41,8 @@
                             'Heading: '            + position.coords.heading + '<br />' +
                             'Speed: '              + position.coords.speed  + '<br />' +
                             'Timestamp: '          + position.timestamp  + '<br />';
-       Count = 0;
-       $("#Vuur").css("display","block");
-
-       $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
+       Count = 0;      
+      $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
        Fire = 0;
     }
 
@@ -61,7 +59,8 @@
 
     $("#Vuur").click(function(){
         Fire = 1;
-        $(this).css("display","none");
+        $(this).attr("disabled","disabled");
+        
     })  
 
     </script>
@@ -76,7 +75,7 @@
 
     <br>
     <br>
-    <input id="Vuur" type="submit" value="VUUR!" style="display:none"></input> 
+    <input id="Vuur" type="submit" value="VUUR!"></input> 
     <br>
     <br>
     <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe>
