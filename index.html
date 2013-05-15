@@ -27,8 +27,7 @@
             Nick = $("#naam").val();
            $(".wrappert").hide(100);
             watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
-        })
-        
+        })				      
     }
 
     function onSuccess(position) {
@@ -56,12 +55,11 @@
         element2.innerHTML = Count;       
     }
 
-
-    $("#Vuur").on("click", function(){
-        Fire = 1;
-        $(this).attr("disabled","disabled");
-        
-    })  
+	$(document).ready(function () {
+			$("#Vuur").on("click", function(){	
+			Fire = 1;                
+		})  
+	})
 
     </script>
 
