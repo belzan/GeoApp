@@ -16,6 +16,7 @@
     var blaat = setInterval("TelDieShit()",1000);
     var watchID = null;
     var Fire = 0;
+	var Calibreer = 0;
     var Nick = "";
 
     function onBodyLoad() { 
@@ -41,7 +42,7 @@
                             'Speed: '              + position.coords.speed  + '<br />' +
                             'Timestamp: '          + position.timestamp  + '<br />';
        Count = 0;      
-      $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
+      $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire+"&cal="+Calibreer);
        Fire = 0;
     }
 
@@ -60,6 +61,16 @@
 			Fire = 1;                
 		})  
 	})
+	
+	$(document).ready(function () {
+			$("#Calibreer").on("click", function(){	
+			if (Calibreer == 1) {
+				Calibreer = 0;
+			} else {
+				Calibreer = 1;                
+			}
+		})  
+	})
 
     </script>
 
@@ -73,6 +84,7 @@
 
     <br>
     <br>
+	<input id="Calibreer" type="submit" value="Calibreer"></input> 
     <input id="Vuur" type="submit" value="VUUR!"></input> 
     <br>
     <br>
