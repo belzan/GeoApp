@@ -48,7 +48,7 @@
       // $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
        Fire = 0;
 	   if (Calibreer = 1) {
-			var val = "{\"lat\":"\""+position.coords.latitude+"\","\"lon\":"\""+position.coords.longitude+"\","\"distance\":"\""+getdistance(curLat, curLon, position.coords.latitude, position.coords.longitude)+"\"}";
+			var val = {"lat":position.coords.latitude,"lon":position.coords.longitude,"distance":getdistance(curLat, curLon, position.coords.latitude, position.coords.longitude)};
 			calibrationList.push(val);
 			console.log(val);
 			console.log(calibrationList);
