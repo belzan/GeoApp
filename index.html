@@ -49,7 +49,7 @@
        Count = 0;      
       // $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
        Fire = 0;
-	   if (Calibreer = 1) {
+	   if (Calibreer == 1) {
 			var distance = getdistance(curLat, curLon, position.coords.latitude, position.coords.longitude);
 			var val = {"lat":position.coords.latitude,"lon":position.coords.longitude,"distance":distance};
 			calibrationList.push(val);
@@ -60,7 +60,7 @@
 			SetOrigin(calibrationList);
 	   }
 	   
-	   if (Calibreer = 2) {
+	   if (Calibreer == 2) {
 			var distance2 = getdistance(oriLat, oriLon, position.coords.latitude, position.coords.longitude);
 	        var element5 = document.getElementById('Movement');
             element5.innerHTML = distance + " tot de oorsprong";	
