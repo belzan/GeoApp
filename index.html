@@ -21,6 +21,8 @@
 	var calibrationList = [];
 	var curLat = 0;
 	var curLon = 0;
+	var oriLat = 0;
+	var oriLon = 0;
 
     function onBodyLoad() { 
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -54,7 +56,14 @@
 			console.log(val);
 			console.log(calibrationList);
 			var element3 = document.getElementById('Movement');
-            element3.innerHTML = distance;			
+            element3.innerHTML = distance;	
+			SetOrigin(calibrationList);
+	   }
+	   
+	   if (Calibreer = 2) {
+			var distance2 = getdistance(oriLat, oriLon, position.coords.latitude, position.coords.longitude);
+	        var element5 = document.getElementById('Movement');
+            element5.innerHTML = distance + " tot de oorsprong";	
 	   }
 	   
 	   curLat = position.coords.latitude;
@@ -87,6 +96,28 @@
 		})  
 	})
 	
+	function SetOrigin(list) {
+		if (list.length > 10) {
+			var counter = 0;
+			var totalLat = 0;
+			var totalLon = 0;
+            jQuery.each(list, function (i, val) {
+				if (val.distance < 0.1) {
+					counter++;
+					totalLat += val.lat;
+					totalLon += val.lon;
+					if (counter == 10) {
+						oriLat = totalLat/10;
+						oriLon = totalLon/10;
+						var element4 = document.getElementById('Origin');
+                        element4.innerHTML = "Point of origin; lat:" + oriLat + " lon:" + oriLon;  
+						Calibreer = 2;
+					}
+				}						
+			});
+         }		
+	}
+	
 	function getdistance(lat1, lon1, lat2, lon2){  // generally used geo measurement function
 		var R = 6378.137; // Radius of earth in KM
 		var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -97,7 +128,7 @@
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		var d = R * c;
 		return d * 1000; // meters
-	}
+	}	
 
     </script>
 
@@ -105,7 +136,8 @@
   <body onload="onBodyLoad()">
     <p id="geolocation">Finding geolocation...</p>
     <p id="Teller">0</p>
-	 <p id="Movement">0</p>
+	<p id="Movement">0</p>
+	<p id="Origin">0</p>
     <div class="wrappert">
     Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
     </div>
@@ -116,7 +148,7 @@
     <input id="Vuur" type="submit" value="VUUR!"></input> 
     <br>
     <br>
-    <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe>
+    <!-- <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe> -->
 
    
 
