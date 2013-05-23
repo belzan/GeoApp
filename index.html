@@ -18,6 +18,9 @@
     var Fire = 0;
 	var Calibreer = 0;
     var Nick = "";
+	var calibrationList = [];
+	var curLat = 0;
+	var curLon = 0;
 
     function onBodyLoad() { 
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -42,8 +45,17 @@
                             'Speed: '              + position.coords.speed  + '<br />' +
                             'Timestamp: '          + position.timestamp  + '<br />';
        Count = 0;      
-      $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire+"&cal="+Calibreer);
+      // $("#myiframe").attr("src","http://www.duwel.net/location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&nick="+Nick+"&fire="+Fire);
        Fire = 0;
+	   if (Calibreer = 1) {
+			var val = "{\"lat\":"\""+position.coords.latitude+"\","\"lon\":"\""+position.coords.longitude+"\","\"distance\":"\""+getdistance(curLat, curLon, position.coords.latitude, position.coords.longitude)+"\"}";
+			calibrationList.push(val);
+			console.log(val);
+			console.log(calibrationList);
+	   }
+	   
+	   curLat = position.coords.latitude;
+	   curLon = position.coords.longitude;	   
     }
 
     function onError(error) {
@@ -71,6 +83,18 @@
 			}
 		})  
 	})
+	
+	function getdistance(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+		var R = 6378.137; // Radius of earth in KM
+		var dLat = (lat2 - lat1) * Math.PI / 180;
+		var dLon = (lon2 - lon1) * Math.PI / 180;
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c;
+		return d * 1000; // meters
+	}
 
     </script>
 
@@ -78,6 +102,7 @@
   <body onload="onBodyLoad()">
     <p id="geolocation">Finding geolocation...</p>
     <p id="Teller">0</p>
+	 <p id="Movement">0</p>
     <div class="wrappert">
     Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
     </div>
