@@ -23,6 +23,8 @@
 	var curLon = 0;
 	var oriLat = 0;
 	var oriLon = 0;
+	var options = { frequency: 1000 }; 
+    var watchID2 = 0;	
 
     function onBodyLoad() { 
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -33,7 +35,9 @@
             Nick = $("#naam").val();
            $(".wrappert").hide(100);
             watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
-        })				      
+			
+        })	
+		startWatch();
     }
 
     function onSuccess(position) {
@@ -70,10 +74,23 @@
 	   curLon = position.coords.longitude;	   
     }
 
+	 function startWatch() {        
+	 var options = { frequency: 1000 };        
+	 watchID2 = navigator.compass.watchHeading(onSuccess2, onError2, options);
+	 }
+	 
     function onError(error) {
         alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');        
     }
 
+	  function onSuccess2(heading) {  
+       var element = document.getElementById('Direction');    element.innerHTML = 'Direction: ' + heading.magneticHeading;
+	  }
+	  
+	  function onError2(compassError) {       
+//	  alert('Compass Error: ' + compassError.code); 
+	  }
+	 
     function TelDieShit(){
         Count++;
         var element2 = document.getElementById('Teller');
@@ -137,6 +154,7 @@
     <p id="geolocation">Finding geolocation...</p>
     <p id="Teller">0</p>
 	<p id="Movement">0</p>
+	<p id="Direction">0</p>
 	<p id="Origin">0</p>
     <div class="wrappert">
     Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
