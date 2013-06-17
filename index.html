@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Properties Example</title>
+    <title>GeoApp</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> 
 
@@ -27,18 +27,28 @@
     var watchID2 = 0;	
 
     function onBodyLoad() { 
+	     $("#NameInput").show();
+		 $("#Go2Spawn").hide();
+		 $("#GeoLocationLock").hide();
+		 $("#Calibrating").hide();
+		 $("#Ready2Enter").hide();    
+		 $("#GameStarted").hide();
         document.addEventListener("deviceready", onDeviceReady, false);
-      }
+    }
 
-    function onDeviceReady() { 
-        $("#submit").on("click",function(){
-            Nick = $("#naam").val();
-           $(".wrappert").hide(100);
-            watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 }); 
-			
-        })	
+    function onDeviceReady() { 		
+      		
 		startWatch();
     }
+	
+	function SubmitName() {		
+		 Nick = $("#naam").val();	
+		 console.log(Nick);		
+         $("#NameInput").hide(100);
+		 $("#Go2Spawn").show(100);
+		 
+       //  watchId = navigator.geolocation.watchPosition(onSuccess, onError,{ timeout: 5000,  enableHighAccuracy: true, maximumAge: 3000 });		 
+	}
 
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
@@ -93,23 +103,52 @@
 	 
     function TelDieShit(){
         Count++;
-        var element2 = document.getElementById('Teller');
-        element2.innerHTML = Count;       
+       // var element2 = document.getElementById('Teller');
+       // element2.innerHTML = Count;       
     }
 
 	$(document).ready(function () {
-			$("#Vuur").on("click", function(){	
-			Fire = 1;                
-		})  
+		  $("#submit").on("click",function(){
+			SubmitName();			
+        })	
+	})
+	
+	$(document).ready(function () {
+			$("#Initalisatie").on("click", function(){				
+				$("#Go2Spawn").hide(100);    
+				$("#GeoLocationLock").show(100);
+			})  
 	})
 	
 	$(document).ready(function () {
 			$("#Calibreer").on("click", function(){	
+			$("#GeoLocationLock").hide(100);    
+			$("#Calibrating").show(100);
 			if (Calibreer == 1) {
 				Calibreer = 0;
 			} else {
 				Calibreer = 1;                
 			}
+		})  
+	})
+	
+	$(document).ready(function () {
+			$("#Calibrated").on("click", function(){				
+				$("#Calibrating").hide(100);    
+				$("#Ready2Enter").show(100);
+			})  
+	})
+	
+	$(document).ready(function () {
+			$("#Join").on("click", function(){				
+				$("#Ready2Enter").hide(100);    
+				$("#GameStarted").show(100);
+			})  
+	})
+	
+	$(document).ready(function () {
+			$("#Vuur").on("click", function(){	
+			Fire = 1;                
 		})  
 	})
 	
@@ -151,22 +190,45 @@
 
   </head>
   <body onload="onBodyLoad()">
-    <p id="geolocation">Finding geolocation...</p>
-    <p id="Teller">0</p>
+	<div id="NameInput">
+		Geef uw naam in: 
+		<input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>    
+	</div>
+	<div id="Go2Spawn">
+		Verplaats u zich naar het spawnpoint a.u.b....
+		<p id="geolocation">Initialisatie van GPS is gaande...</p>
+		<input id="Initalisatie" type="submit" value="Voltooid"></input> 
+	</div>
+	<div id="GeoLocationLock">
+		<p>GPS geinitialiseerd. Druk op calibreer om dit uw spawnpoint te maken.</p>
+		<input id="Calibreer" type="submit" value="Calibreer"></input> 
+	</div>
+     <div id="Calibrating">
+		<p>Calibratie van spawnpoint is gaande.</p>
+		<input id="Calibrated" type="submit" value="Voltooid"></input> 
+	 </div>
+	 <div id="Ready2Enter">
+		<p>U bent gereed om het spel te betreden.</p>
+		<input id="Join" type="submit" value="Neem deel"></input> 
+	 </div>
+	  <div id="GameStarted">
+		<p>U bent het spel betreden. Vuur weg.</p>
+		<input id="Vuur" type="submit" value="Vuur"></input> 
+	 </div>
+  
+    
+<!--     <p id="Teller">0</p>
 	<p id="Movement">0</p>
 	<p id="Direction">0</p>
 	<p id="Origin">0</p>
-    <div class="wrappert">
-    Naam: <input id="naam" placeholder="Naam" type="text"></input><input id="submit" type="submit" value="Gaan!"></input>
-    </div>
-
+  
     <br>
     <br>
-	<input id="Calibreer" type="submit" value="Calibreer"></input> 
+	
     <input id="Vuur" type="submit" value="VUUR!"></input> 
     <br>
     <br>
-    <!-- <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe> -->
+    <!-- <iframe id="myiframe" width="280" height="100" src="http://www.duwel.net/location.php" ></iframe> --> 
 
    
 
