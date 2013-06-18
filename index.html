@@ -113,7 +113,7 @@
 
        function onCompassUpdate(heading){    
             var element = document.getElementById('Direction');    element.innerHTML = 'Direction: ' + heading.magneticHeading;	                          
-            updateHeading(heading.magneticHeading);			
+            updateHeading(360-heading.magneticHeading);			
         }
 		
 		function updateHeading(diff){
