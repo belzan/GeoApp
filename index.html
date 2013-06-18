@@ -111,7 +111,8 @@
         alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');        
     }
 
-       function onCompassUpdate(heading){            
+       function onCompassUpdate(heading){    
+            var element = document.getElementById('Direction');    element.innerHTML = 'Direction: ' + heading.magneticHeading;	   
             currentHeading = Math.round(heading.magneticHeading);
             if(currentHeading == prevHeading) return;
             updateHeading(currentheading);
@@ -139,7 +140,7 @@
 	 
     function TelDieShit(){
         Count++;
-        updateDifference(Count);       
+        // updateDifference(Count);       
     }
 
 	$(document).ready(function () {
@@ -254,7 +255,7 @@
 	 </div>	 
 	 <div id="arrow" class="arrow">
 	 </div>
-  
+     <p id="Direction">0</p>
     
 <!--     <p id="Teller">0</p>
 	<p id="Movement">0</p>
