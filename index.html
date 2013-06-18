@@ -112,7 +112,7 @@
     }
 
        function onCompassUpdate(heading){            
-            currentHeading = heading.trueHeading >= 0 ? Math.round(heading.trueHeading) : Math.round(heading.magneticHeading);
+            currentHeading = Math.round(heading.magneticHeading);
             if(currentHeading == prevHeading) return;
             updateHeading(prevheading-currentheading);
 			prevHeading = currentHeading;
