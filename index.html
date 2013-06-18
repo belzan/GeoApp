@@ -114,7 +114,7 @@
        function onCompassUpdate(heading){            
             currentHeading = Math.round(heading.magneticHeading);
             if(currentHeading == prevHeading) return;
-            updateHeading(prevheading-currentheading);
+            updateHeading(currentheading);
 			prevHeading = currentHeading;
         }
 		
@@ -251,7 +251,7 @@
 	  <div id="GameStarted">
 		<p>U bent het spel betreden. Vuur weg.</p>
 		<input id="Vuur" type="submit" value="Vuur"></input> 
-	 </div>
+	 </div>	 
 	 <div id="arrow" class="arrow">
 	 </div>
   
